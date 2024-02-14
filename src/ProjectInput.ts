@@ -1,6 +1,9 @@
 import { Validator } from "./types";
 import { validate } from "./helpers";
 import { autoBind } from "./decorators";
+import { ProjectState } from "./ProjectState";
+
+const projectState = ProjectState.getInstance();
 
 export class ProjectInput {
     templateElement: HTMLTemplateElement;
@@ -25,7 +28,7 @@ export class ProjectInput {
         this.attach();
     }
 
-    private  gatherUserInput(): [string, string, number] | undefined {
+    private  gatherUserInput(): [ string, string, number ] | undefined {
         const enteredTitle = this.titleInputElement.value;
         const enteredDescription = this.descriptionInputElement.value;
         const enteredPeople = this.peopleInputElement.value;
@@ -65,8 +68,8 @@ export class ProjectInput {
         event.preventDefault();
         const userInput = this.gatherUserInput();
         if (Array.isArray(userInput)) {
-            const [title, description, people] = userInput;
-            console.log(title, description, people);
+            const [ title, description, people ] = userInput;
+            projectState.addProject(title, description, people);
             this.clearInputs();
         }
     }
