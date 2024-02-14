@@ -1,5 +1,5 @@
-import { ProjectList } from "./ProjectList";
-import { ProjectInput } from "./ProjectInput";
+import { ProjectList } from './ProjectList';
+import { ProjectInput } from './ProjectInput';
 
 const prjInput = new ProjectInput();
 const activePrjList = new ProjectList('active');

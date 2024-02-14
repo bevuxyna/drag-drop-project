@@ -1,32 +1,31 @@
+import { Project } from './Project';
+import { ProjectStatus } from './consts';
+import { Listener } from './types';
+
 export class ProjectState {
-    private projects: any[] = [];
-    private static instance: ProjectState;
-    private listeners: any[] = [];
+  private projects: Project[] = [];
+  private static instance: ProjectState;
+  private listeners: Listener[] = [];
 
-    private constructor() {}
+  private constructor() {}
 
-    static getInstance() {
-        if (this.instance) {
-            return this.instance;
-        }
-        this.instance = new ProjectState();
-        return this.instance;
+  static getInstance() {
+    if (this.instance) {
+      return this.instance;
     }
+    this.instance = new ProjectState();
+    return this.instance;
+  }
 
-    addListener(listenerFn: Function) {
-        this.listeners.push(listenerFn);
-    }
+  addListener(listenerFn: Listener) {
+    this.listeners.push(listenerFn);
+  }
 
-    addProject(title: string, description: string, numOfPeople: number) {
-        const newProject = {
-            id: Math.random().toString(),
-            title: title,
-            description: description,
-            people: numOfPeople,
-        }
-        this.projects.push(newProject);
-        for (const listenerFn of this.listeners) {
-            listenerFn(this.projects.slice());
-        }
+  addProject(title: string, description: string, numOfPeople: number) {
+    const newProject = new Project(Math.random().toString(), title, description, numOfPeople, ProjectStatus.Active);
+    this.projects.push(newProject);
+    for (const listenerFn of this.listeners) {
+      listenerFn(this.projects.slice());
     }
+  }
 }
