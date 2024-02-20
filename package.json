@@ -16,6 +16,7 @@
   "author": "Vlada Melnikova",
   "license": "ISC",
   "devDependencies": {
+    "clean-webpack-plugin": "^4.0.0",
     "lite-server": "^2.6.1",
     "prettier": "2.8.8",
     "ts-loader": "^9.5.1",
