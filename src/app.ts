@@ -1,3 +1,14 @@
+interface Draggable {
+  dragStartHandler(event: DragEvent): void;
+  dragEndHandler(event: DragEvent): void;
+}
+
+interface DragTarget {
+  dragOverHandler(event: DragEvent): void;
+  dropHandler(event: DragEvent): void;
+  dragLeaveHandler(event: DragEvent): void;
+}
+
 enum ProjectStatus {
   Active,
   Finished,
@@ -46,8 +57,13 @@ function validate(validatableInput: Validator) {
 }
 
 class Project {
-  constructor(public id: string, public title: string, public description: string, public people: number, public status: ProjectStatus) {
-  }
+  constructor(
+    public id: string,
+    public title: string,
+    public description: string,
+    public people: number,
+    public status: ProjectStatus
+  ) {}
 }
 
 class State<T> {
@@ -179,7 +195,7 @@ class ProjectInput extends Component<HTMLDivElement, HTMLFormElement>{
   renderContent() {}
 }
 
-class ProjectItem extends Component<HTMLUListElement, HTMLLIElement> {
+class ProjectItem extends Component<HTMLUListElement, HTMLLIElement> implements Draggable {
   private project: Project;
 
   get persons() {
@@ -197,7 +213,19 @@ class ProjectItem extends Component<HTMLUListElement, HTMLLIElement> {
     this.renderContent();
   }
 
+  @autoBind
+  dragStartHandler(event: DragEvent) {
+    console.log('event', event);
+  }
+
+  @autoBind
+  dragEndHandler(event: DragEvent) {
+    console.log('event', event);
+  }
+
   configure() {
+    this.element.addEventListener('dragstart', this.dragStartHandler);
+    this.element.addEventListener('dragend', this.dragEndHandler);
   }
 
   renderContent() {
