@@ -14,7 +14,14 @@
   "author": "Vlada Melnikova",
   "license": "ISC",
   "devDependencies": {
-    "lite-server": "^2.5.4",
-    "prettier": "2.8.8"
+    "lite-server": "^2.6.1",
+    "prettier": "2.8.8",
+    "ts-loader": "^9.5.1",
+    "typescript": "^5.3.3",
+    "webpack": "^5.90.3",
+    "webpack-dev-server": "^5.0.2"
+  },
+  "dependencies": {
+    "webpack-cli": "^5.1.4"
   }
 }
