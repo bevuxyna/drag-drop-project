@@ -6,6 +6,7 @@ module.exports = {
   output: {
     filename: 'app.js',
     path: path.resolve(__dirname, 'dist'),
+    publicPath: '/dist/',
   },
   devtool: 'inline-source-map',
   module: {
@@ -19,5 +20,12 @@ module.exports = {
   },
   resolve: {
     extensions: ['.ts', '.js'],
+  },
+  devServer: {
+    static: [
+      {
+        directory: path.join(__dirname),
+      },
+    ],
   },
 }
